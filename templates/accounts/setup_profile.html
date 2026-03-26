@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-lg mx-auto py-10 px-4">
+  <div class="text-center mb-8">
+    <h1 class="text-2xl font-bold text-gray-800 dark:text-white">
+      Set up your profile
+    </h1>
+    <p class="text-gray-500 dark:text-gray-400 mt-1 text-sm">
+      This helps us calculate your personalised meal plan
+    </p>
+  </div>
+
+  <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border border-orange-100 dark:border-gray-700">
+    {% include 'components/flash_messages.html' %}
+
+    <form method="POST" class="space-y-5">
+      {% csrf_token %}
+
+      <!-- Goal -->
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+          What's your goal?
+        </label>
+        <div class="grid grid-cols-2 gap-3">
+          {% for value, label in form.fields.goal.choices %}
+            {% if value %}
+              <label class="goal-option cursor-pointer">
+                <input
+                  type="radio"
+                  name="goal"
+                  value="{{ value }}"
+                  class="sr-only peer"
+                  {% if form.goal.value == value %}checked{% endif %}
+                />
+                <div class="p-3 rounded-xl border-2 border-gray-200 dark:border-gray-600 text-center text-sm font-medium hover:border-orange-400 transition-colors peer-checked:border-orange-500 peer-checked:bg-orange-50 dark:peer-checked:bg-orange-900/20 dark:text-gray-300">
+                  {{ label }}
+                </div>
+              </label>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Sex -->
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+          Sex
+        </label>
+        {{ form.sex }}
+      </div>
+
+      <!-- Date of Birth -->
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+          Date of Birth
+        </label>
+        {{ form.date_of_birth }}
+      </div>
+
+      <!-- Weight & Height -->
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+            Weight (kg)
+          </label>
+          {{ form.weight_kg }}
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+            Height (cm)
+          </label>
+          {{ form.height_cm }}
+        </div>
+      </div>
+
+      <!-- Activity Level -->
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+          Activity Level
+        </label>
+        {{ form.activity_level }}
+      </div>
+
+      <!-- Health Conditions -->
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+          Any health conditions?
+          <span class="font-normal text-gray-400">(optional)</span>
+        </label>
+        <div class="space-y-2 bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4">
+          <label class="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300 cursor-pointer">
+            <input
+              type="checkbox"
+              name="{{ form.has_diabetes.html_name }}"
+              {% if form.has_diabetes.value %}checked{% endif %}
+              class="w-4 h-4 rounded border-gray-300 text-orange-500 focus:ring-orange-400 focus:ring-2 accent-orange-500"
+            />
+            Diabetes
+          </label>
+          <label class="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300 cursor-pointer">
+            <input
+              type="checkbox"
+              name="{{ form.has_hypertension.html_name }}"
+              {% if form.has_hypertension.value %}checked{% endif %}
+              class="w-4 h-4 rounded border-gray-300 text-orange-500 focus:ring-orange-400 focus:ring-2 accent-orange-500"
+            />
+            Hypertension (High blood pressure)
+          </label>
+          <label class="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300 cursor-pointer">
+            <input
+              type="checkbox"
+              name="{{ form.has_obesity.html_name }}"
+              {% if form.has_obesity.value %}checked{% endif %}
+              class="w-4 h-4 rounded border-gray-300 text-orange-500 focus:ring-orange-400 focus:ring-2 accent-orange-500"
+            />
+            Obesity
+          </label>
+          <label class="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300 cursor-pointer">
+            <input
+              type="checkbox"
+              name="{{ form.is_pregnant.html_name }}"
+              {% if form.is_pregnant.value %}checked{% endif %}
+              class="w-4 h-4 rounded border-gray-300 text-orange-500 focus:ring-orange-400 focus:ring-2 accent-orange-500"
+            />
+            Pregnant
+          </label>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-xl transition-colors shadow-sm"
+      >
+        Generate My Meal Plan →
+      </button>
+
+      <a
+        href="{% url 'dashboard:home' %}"
+        class="block text-center text-sm text-gray-400 hover:text-gray-600 mt-2"
+      >
+        Skip for now
+      </a>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,1001 @@
+{
+  "_metadata": {
+    "title": "Kenya Food Portion Size Reference",
+    "description": "Localized portion size descriptions mapped to gram weights for common Kenyan foods and dishes. Use with kenya_foods_database.json. All weights are estimates for a typical adult serving.",
+    "version": "1.0",
+    "source": "Derived from Kenya Food Composition Tables 2018 (FAO/Government of Kenya) + standard Kenyan household portion estimates",
+    "note": "Portion weights are averages. Adjust based on user feedback over time."
+  },
+
+  "portion_units": {
+    "description": "Reusable unit definitions referenced across foods",
+    "units": [
+      { "unit_id": "sufuria_scoop", "label": "Sufuria scoop (large serving spoon)", "description": "One heaped metal sufuria ladle" },
+      { "unit_id": "teacup", "label": "Teacup (250ml cup)", "description": "Standard Kenyan 250ml enamel or ceramic teacup" },
+      { "unit_id": "glass_300ml", "label": "Glass (300ml)", "description": "Standard drinking glass" },
+      { "unit_id": "tablespoon", "label": "Tablespoon (15ml)", "description": "Standard tablespoon" },
+      { "unit_id": "teaspoon", "label": "Teaspoon (5ml)", "description": "Standard teaspoon" },
+      { "unit_id": "piece", "label": "Piece / unit", "description": "One whole item" },
+      { "unit_id": "half", "label": "Half piece", "description": "Half of one item" },
+      { "unit_id": "plate_full", "label": "Full plate", "description": "Standard 26cm diameter dinner plate, fully loaded" },
+      { "unit_id": "plate_half", "label": "Half plate", "description": "Half a standard dinner plate" },
+      { "unit_id": "bowl_large", "label": "Large bowl (500ml)", "description": "Large porridge/soup bowl" },
+      { "unit_id": "bowl_medium", "label": "Medium bowl (350ml)", "description": "Medium serving bowl" },
+      { "unit_id": "handful", "label": "Handful (loose)", "description": "One open palm loosely filled" },
+      { "unit_id": "slice", "label": "Slice", "description": "One cut slice" }
+    ]
+  },
+
+  "portions": [
+
+    {
+      "food_code": "15005",
+      "food_name": "Ugali (Whole Maize Flour)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small piece", "description": "Small fist-sized piece", "weight_g": 150, "typical_use": "Light meal side" },
+        { "label": "Medium piece", "description": "Medium fist-sized piece (standard serving)", "weight_g": 250, "typical_use": "Standard meal" },
+        { "label": "Large piece", "description": "Large piece, typical male serving", "weight_g": 350, "typical_use": "Hungry adult" },
+        { "label": "Half plate", "description": "Half dinner plate of ugali", "weight_g": 300, "typical_use": "Combined plate estimate" }
+      ]
+    },
+
+    {
+      "food_code": "15009",
+      "food_name": "Refined Maize Flour Ugali",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small piece", "weight_g": 150 },
+        { "label": "Medium piece (standard)", "weight_g": 250 },
+        { "label": "Large piece", "weight_g": 350 }
+      ]
+    },
+
+    {
+      "food_code": "15006",
+      "food_name": "Maize and Finger Millet Flour Ugali",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small piece", "weight_g": 150 },
+        { "label": "Medium piece (standard)", "weight_g": 250 },
+        { "label": "Large piece", "weight_g": 350 }
+      ]
+    },
+
+    {
+      "food_code": "15100",
+      "food_name": "Finger Millet Ugali",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small piece", "weight_g": 150 },
+        { "label": "Medium piece (standard)", "weight_g": 250 },
+        { "label": "Large piece", "weight_g": 350 }
+      ]
+    },
+
+    {
+      "food_code": "15019",
+      "food_name": "White Chapati",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "1 chapati (small/thin)", "description": "Small thin chapati, ~18cm diameter", "weight_g": 60, "typical_use": "Light snack" },
+        { "label": "1 chapati (standard)", "description": "Standard chapati, ~22cm diameter", "weight_g": 85, "typical_use": "Normal serving" },
+        { "label": "1 chapati (large/thick)", "description": "Large thick chapati from hotel/mkokoteni", "weight_g": 110, "typical_use": "Restaurant/street food" },
+        { "label": "2 chapatis", "weight_g": 170 },
+        { "label": "3 chapatis", "weight_g": 255 }
+      ]
+    },
+
+    {
+      "food_code": "15020",
+      "food_name": "Brown Chapati",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "1 chapati (small)", "weight_g": 60 },
+        { "label": "1 chapati (standard)", "weight_g": 85 },
+        { "label": "1 chapati (large)", "weight_g": 110 },
+        { "label": "2 chapatis", "weight_g": 170 }
+      ]
+    },
+
+    {
+      "food_code": "15074",
+      "food_name": "Wali wa Kuchemshwa (Boiled Rice)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small serving (half teacup cooked)", "weight_g": 130, "typical_use": "Light portion" },
+        { "label": "Medium serving (1 teacup cooked)", "weight_g": 200, "typical_use": "Standard adult serving" },
+        { "label": "Large serving (1.5 teacups cooked)", "weight_g": 300, "typical_use": "Hungry adult" },
+        { "label": "Sufuria scoop", "description": "One sufuria ladle of rice", "weight_g": 180 }
+      ]
+    },
+
+    {
+      "food_code": "15075",
+      "food_name": "Wali wa Yasmin (Onion Fried Rice)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small serving", "weight_g": 130 },
+        { "label": "Medium serving (standard)", "weight_g": 200 },
+        { "label": "Large serving", "weight_g": 300 }
+      ]
+    },
+
+    {
+      "food_code": "15036",
+      "food_name": "Pilau (Spiced Rice)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small plate", "weight_g": 200, "typical_use": "Light meal" },
+        { "label": "Standard plate", "weight_g": 300, "typical_use": "Normal serving" },
+        { "label": "Large plate", "weight_g": 400, "typical_use": "Restaurant/feast serving" }
+      ]
+    },
+
+    {
+      "food_code": "15066",
+      "food_name": "Biryani Rice",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small plate", "weight_g": 200 },
+        { "label": "Standard plate", "weight_g": 300 },
+        { "label": "Large plate", "weight_g": 400 }
+      ]
+    },
+
+    {
+      "food_code": "15129",
+      "food_name": "Steamed Rice (Wali wa Mvuke)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Half teacup (cooked)", "weight_g": 130 },
+        { "label": "1 teacup (cooked)", "weight_g": 200 },
+        { "label": "1.5 teacups (cooked)", "weight_g": 300 }
+      ]
+    },
+
+    {
+      "food_code": "15053",
+      "food_name": "Githeri (Stewed Maize & Beans)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small bowl", "description": "Small bowl of githeri", "weight_g": 200, "typical_use": "Snack/light meal" },
+        { "label": "Medium bowl (standard)", "description": "Standard serving bowl", "weight_g": 300, "typical_use": "Main meal" },
+        { "label": "Large bowl", "weight_g": 400, "typical_use": "Hungry adult" },
+        { "label": "Sufuria scoop", "weight_g": 250 }
+      ]
+    },
+
+    {
+      "food_code": "15055",
+      "food_name": "Githeri (Sauteed Fresh Maize and Beans)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small bowl", "weight_g": 200 },
+        { "label": "Medium bowl (standard)", "weight_g": 300 },
+        { "label": "Large bowl", "weight_g": 400 }
+      ]
+    },
+
+    {
+      "food_code": "15054",
+      "food_name": "Mukimo (Maize, Beans, Potatoes & Pumpkin Leaves)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small serving", "weight_g": 200 },
+        { "label": "Medium serving (standard)", "weight_g": 300 },
+        { "label": "Large serving", "weight_g": 400 }
+      ]
+    },
+
+    {
+      "food_code": "15057",
+      "food_name": "Mukimo (Fresh Maize, Potatoes & Pumpkin Leaves)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small serving", "weight_g": 200 },
+        { "label": "Medium serving (standard)", "weight_g": 300 },
+        { "label": "Large serving", "weight_g": 400 }
+      ]
+    },
+
+    {
+      "food_code": "15086",
+      "food_name": "Muthokoi (Dehulled Maize and Beans)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small bowl", "weight_g": 200 },
+        { "label": "Medium bowl", "weight_g": 300 },
+        { "label": "Large bowl", "weight_g": 400 }
+      ]
+    },
+
+    {
+      "food_code": "15031",
+      "food_name": "Sukumawiki (Stir fried kales)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small scoop", "description": "Small side portion on plate", "weight_g": 60, "typical_use": "Side vegetable" },
+        { "label": "Medium scoop (standard)", "description": "Standard side serving", "weight_g": 100, "typical_use": "Normal side" },
+        { "label": "Large scoop", "description": "Generous vegetable side", "weight_g": 150 },
+        { "label": "Full bowl", "weight_g": 200, "typical_use": "Main vegetable dish" }
+      ]
+    },
+
+    {
+      "food_code": "15032",
+      "food_name": "Stir-fried Cabbage",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small scoop", "weight_g": 60 },
+        { "label": "Medium scoop (standard)", "weight_g": 100 },
+        { "label": "Large scoop", "weight_g": 150 }
+      ]
+    },
+
+    {
+      "food_code": "15076",
+      "food_name": "Stir-fried Spinach",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small scoop", "weight_g": 60 },
+        { "label": "Medium scoop (standard)", "weight_g": 100 },
+        { "label": "Large scoop", "weight_g": 150 }
+      ]
+    },
+
+    {
+      "food_code": "15030",
+      "food_name": "Terere (Stir fried amaranth leaves)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small scoop", "weight_g": 60 },
+        { "label": "Medium scoop (standard)", "weight_g": 100 },
+        { "label": "Large scoop", "weight_g": 150 }
+      ]
+    },
+
+    {
+      "food_code": "15087",
+      "food_name": "Beef Stew",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small ladle (1 piece meat + sauce)", "weight_g": 100, "typical_use": "Light protein side" },
+        { "label": "Medium ladle (2 pieces + sauce)", "weight_g": 180, "typical_use": "Standard serving" },
+        { "label": "Large ladle (3 pieces + sauce)", "weight_g": 260, "typical_use": "Generous serving" }
+      ]
+    },
+
+    {
+      "food_code": "15017",
+      "food_name": "Omena Stew (Silver Sardine Stew)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small scoop", "weight_g": 80, "typical_use": "Side protein" },
+        { "label": "Medium scoop (standard)", "weight_g": 130, "typical_use": "Normal serving" },
+        { "label": "Large scoop", "weight_g": 180 }
+      ]
+    },
+
+    {
+      "food_code": "15101",
+      "food_name": "Omena wa Kukaangwa (Fried Omena)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small serving", "weight_g": 50 },
+        { "label": "Medium serving (standard)", "weight_g": 80 },
+        { "label": "Large serving", "weight_g": 120 }
+      ]
+    },
+
+    {
+      "food_code": "15096",
+      "food_name": "Fried Tilapia",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "1 small tilapia (whole, with bones)", "weight_g": 150, "typical_use": "Small fish" },
+        { "label": "1 medium tilapia (whole, with bones)", "weight_g": 250, "typical_use": "Standard restaurant serving" },
+        { "label": "1 large tilapia (whole, with bones)", "weight_g": 350, "typical_use": "Large fish" },
+        { "label": "Half tilapia", "weight_g": 125 }
+      ]
+    },
+
+    {
+      "food_code": "15107",
+      "food_name": "Stewed Nile Perch",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small portion (1 piece)", "weight_g": 120 },
+        { "label": "Medium portion (2 pieces)", "weight_g": 200 },
+        { "label": "Large portion", "weight_g": 280 }
+      ]
+    },
+
+    {
+      "food_code": "15108",
+      "food_name": "Stewed Goat Meat",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small serving (1-2 pieces)", "weight_g": 100 },
+        { "label": "Medium serving (2-3 pieces)", "weight_g": 180 },
+        { "label": "Large serving (3-4 pieces)", "weight_g": 260 }
+      ]
+    },
+
+    {
+      "food_code": "15070",
+      "food_name": "Ingokho (Stewed Chicken)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "1 chicken piece (thigh or drumstick) with sauce", "weight_g": 180 },
+        { "label": "1 large piece (breast) with sauce", "weight_g": 250 },
+        { "label": "2 pieces with sauce", "weight_g": 350 }
+      ]
+    },
+
+    {
+      "food_code": "15073",
+      "food_name": "Ingokho (Fried Chicken)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "1 piece (drumstick/thigh)", "weight_g": 120 },
+        { "label": "1 piece (breast)", "weight_g": 180 },
+        { "label": "2 pieces", "weight_g": 240 }
+      ]
+    },
+
+    {
+      "food_code": "15022",
+      "food_name": "Fried Egg (Mayai ya Kukaangwa)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "1 fried egg", "weight_g": 55, "typical_use": "Breakfast side" },
+        { "label": "2 fried eggs", "weight_g": 110 },
+        { "label": "3 fried eggs", "weight_g": 165 }
+      ]
+    },
+
+    {
+      "food_code": "15023",
+      "food_name": "Omelette",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small omelette (2 eggs)", "weight_g": 100 },
+        { "label": "Medium omelette (3 eggs)", "weight_g": 150 },
+        { "label": "Large omelette (4 eggs)", "weight_g": 200 }
+      ]
+    },
+
+    {
+      "food_code": "15044",
+      "food_name": "Mchuzi wa Ndengu (Green Gram Stew)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small scoop", "weight_g": 100 },
+        { "label": "Medium scoop (standard)", "weight_g": 180 },
+        { "label": "Large scoop", "weight_g": 260 },
+        { "label": "Sufuria scoop", "weight_g": 200 }
+      ]
+    },
+
+    {
+      "food_code": "15045",
+      "food_name": "Mchuzi wa Maharagwe (Bean Stew)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small scoop", "weight_g": 100 },
+        { "label": "Medium scoop (standard)", "weight_g": 180 },
+        { "label": "Large scoop", "weight_g": 260 },
+        { "label": "Sufuria scoop", "weight_g": 200 }
+      ]
+    },
+
+    {
+      "food_code": "15046",
+      "food_name": "Mchuzi wa Ndengu Kamande (Lentil Stew)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small scoop", "weight_g": 100 },
+        { "label": "Medium scoop (standard)", "weight_g": 180 },
+        { "label": "Large scoop", "weight_g": 260 }
+      ]
+    },
+
+    {
+      "food_code": "15092",
+      "food_name": "Mchuzi wa Mbaazi (Pigeon Peas Stew)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small scoop", "weight_g": 100 },
+        { "label": "Medium scoop (standard)", "weight_g": 180 },
+        { "label": "Large scoop", "weight_g": 260 }
+      ]
+    },
+
+    {
+      "food_code": "15037",
+      "food_name": "Mseto wa Ndengu (Rice with Green Grams)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small plate", "weight_g": 200 },
+        { "label": "Medium plate (standard)", "weight_g": 300 },
+        { "label": "Large plate", "weight_g": 400 }
+      ]
+    },
+
+    {
+      "food_code": "15038",
+      "food_name": "Mseto wa Maharagwe (Rice with Beans)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small plate", "weight_g": 200 },
+        { "label": "Medium plate (standard)", "weight_g": 300 },
+        { "label": "Large plate", "weight_g": 400 }
+      ]
+    },
+
+    {
+      "food_code": "15001",
+      "food_name": "Uji wa Mahindi (Maize Porridge)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small cup (250ml)", "weight_g": 220, "typical_use": "Child/light breakfast" },
+        { "label": "Medium bowl (350ml)", "weight_g": 310, "typical_use": "Standard adult breakfast" },
+        { "label": "Large bowl (500ml)", "weight_g": 440, "typical_use": "Filling breakfast" }
+      ]
+    },
+
+    {
+      "food_code": "15014",
+      "food_name": "Finger Millet Porridge (Uji wa Wimbi)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small cup (250ml)", "weight_g": 220 },
+        { "label": "Medium bowl (350ml)", "weight_g": 310 },
+        { "label": "Large bowl (500ml)", "weight_g": 440 }
+      ]
+    },
+
+    {
+      "food_code": "15013",
+      "food_name": "Cassava Porridge (Uji wa Muhogo)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small cup (250ml)", "weight_g": 220 },
+        { "label": "Medium bowl (350ml)", "weight_g": 310 },
+        { "label": "Large bowl (500ml)", "weight_g": 440 }
+      ]
+    },
+
+    {
+      "food_code": "15122",
+      "food_name": "Oatmeal",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small bowl", "weight_g": 200 },
+        { "label": "Standard bowl", "weight_g": 280 },
+        { "label": "Large bowl", "weight_g": 350 }
+      ]
+    },
+
+    {
+      "food_code": "15081",
+      "food_name": "Chai ya Maziwa (Mixed Tea)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "1 small cup (200ml)", "weight_g": 200, "typical_use": "Quick cup" },
+        { "label": "1 standard teacup (250ml)", "weight_g": 250, "typical_use": "Normal chai" },
+        { "label": "1 large mug (350ml)", "weight_g": 350, "typical_use": "Large mug" }
+      ]
+    },
+
+    {
+      "food_code": "15004",
+      "food_name": "Mahamri (Swahili Doughnuts)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "1 small mahamri", "weight_g": 45, "typical_use": "Snack" },
+        { "label": "1 standard mahamri", "weight_g": 65, "typical_use": "Normal serving" },
+        { "label": "2 mahamri", "weight_g": 130 },
+        { "label": "3 mahamri", "weight_g": 195 }
+      ]
+    },
+
+    {
+      "food_code": "15124",
+      "food_name": "Mandazi (East African Doughnuts)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "1 small mandazi", "weight_g": 40 },
+        { "label": "1 standard mandazi", "weight_g": 60 },
+        { "label": "2 mandazi", "weight_g": 120 },
+        { "label": "3 mandazi", "weight_g": 180 }
+      ]
+    },
+
+    {
+      "food_code": "15003",
+      "food_name": "Kaimati (Fried Dumplings)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "3 pieces (small serving)", "weight_g": 60 },
+        { "label": "5 pieces (standard serving)", "weight_g": 100 },
+        { "label": "8 pieces (generous serving)", "weight_g": 160 }
+      ]
+    },
+
+    {
+      "food_code": "15025",
+      "food_name": "Meat Samosa (Sambusa ya Nyama)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "1 samosa", "weight_g": 55 },
+        { "label": "2 samosas", "weight_g": 110 },
+        { "label": "3 samosas", "weight_g": 165 }
+      ]
+    },
+
+    {
+      "food_code": "15026",
+      "food_name": "Vegetable Samosa (Sambusa ya Mboga)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "1 samosa", "weight_g": 50 },
+        { "label": "2 samosas", "weight_g": 100 },
+        { "label": "3 samosas", "weight_g": 150 }
+      ]
+    },
+
+    {
+      "food_code": "15110",
+      "food_name": "Potato Chips (French Fries)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small paper bag / street chips", "weight_g": 100, "typical_use": "Street snack" },
+        { "label": "Medium serving (restaurant)", "weight_g": 150, "typical_use": "Restaurant side" },
+        { "label": "Large serving", "weight_g": 200 }
+      ]
+    },
+
+    {
+      "food_code": "15103",
+      "food_name": "Mashed Potatoes",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small scoop", "weight_g": 120 },
+        { "label": "Medium scoop (standard)", "weight_g": 200 },
+        { "label": "Large scoop", "weight_g": 280 }
+      ]
+    },
+
+    {
+      "food_code": "15056",
+      "food_name": "Matoke (Stewed Green Bananas & Meat)",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small plate", "weight_g": 200 },
+        { "label": "Medium plate (standard)", "weight_g": 300 },
+        { "label": "Large plate", "weight_g": 400 }
+      ]
+    },
+
+    {
+      "food_code": "15098",
+      "food_name": "Stir Fried Beef",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small serving (1-2 pieces)", "weight_g": 80 },
+        { "label": "Medium serving (3-4 pieces)", "weight_g": 150 },
+        { "label": "Large serving (5+ pieces)", "weight_g": 220 }
+      ]
+    },
+
+    {
+      "food_code": "15131",
+      "food_name": "Potato Bhajia",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small serving (4-5 pieces)", "weight_g": 80 },
+        { "label": "Standard serving (6-8 pieces)", "weight_g": 130 },
+        { "label": "Large serving (10+ pieces)", "weight_g": 180 }
+      ]
+    },
+
+    {
+      "food_code": "15127",
+      "food_name": "Potato Curry",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small scoop", "weight_g": 120 },
+        { "label": "Medium scoop (standard)", "weight_g": 200 },
+        { "label": "Large scoop", "weight_g": 280 }
+      ]
+    },
+
+    {
+      "food_code": "15082",
+      "food_name": "Stewed Dried Fish",
+      "food_group": "Mixed Dishes",
+      "portions": [
+        { "label": "Small scoop", "weight_g": 80 },
+        { "label": "Medium scoop (standard)", "weight_g": 130 },
+        { "label": "Large scoop", "weight_g": 180 }
+      ]
+    },
+
+    {
+      "food_code": "01007",
+      "food_name": "Bread, White",
+      "food_group": "Cereals and Cereal Products",
+      "portions": [
+        { "label": "1 thin slice", "weight_g": 25, "typical_use": "Light snack" },
+        { "label": "1 standard slice", "weight_g": 35, "typical_use": "Toast/sandwich" },
+        { "label": "1 thick slice", "weight_g": 45 },
+        { "label": "2 slices (sandwich)", "weight_g": 70 }
+      ]
+    },
+
+    {
+      "food_code": "01005",
+      "food_name": "Bread, Brown",
+      "food_group": "Cereals and Cereal Products",
+      "portions": [
+        { "label": "1 thin slice", "weight_g": 25 },
+        { "label": "1 standard slice", "weight_g": 35 },
+        { "label": "1 thick slice", "weight_g": 45 },
+        { "label": "2 slices (sandwich)", "weight_g": 70 }
+      ]
+    },
+
+    {
+      "food_code": "01009",
+      "food_name": "Breakfast Cereal (Cornflakes)",
+      "food_group": "Cereals and Cereal Products",
+      "portions": [
+        { "label": "Small bowl (dry)", "weight_g": 30, "typical_use": "Child serving" },
+        { "label": "Standard bowl (dry)", "weight_g": 45, "typical_use": "Adult serving" },
+        { "label": "Large bowl (dry)", "weight_g": 60 }
+      ]
+    },
+
+    {
+      "food_code": "02009",
+      "food_name": "Potato (Irish/English), peeled",
+      "food_group": "Starchy Roots, Tubers and Bananas",
+      "portions": [
+        { "label": "1 small potato", "weight_g": 80 },
+        { "label": "1 medium potato", "weight_g": 130, "typical_use": "Standard serving" },
+        { "label": "1 large potato", "weight_g": 200 },
+        { "label": "2 medium potatoes", "weight_g": 260 }
+      ]
+    },
+
+    {
+      "food_code": "02007",
+      "food_name": "Cassava, white, peeled, raw",
+      "food_group": "Starchy Roots, Tubers and Bananas",
+      "portions": [
+        { "label": "Small piece (boiled)", "weight_g": 100 },
+        { "label": "Medium piece (boiled)", "weight_g": 180, "typical_use": "Standard side" },
+        { "label": "Large piece (boiled)", "weight_g": 250 }
+      ]
+    },
+
+    {
+      "food_code": "02013",
+      "food_name": "Sweet Potato, brown skin, peeled",
+      "food_group": "Starchy Roots, Tubers and Bananas",
+      "portions": [
+        { "label": "1 small sweet potato", "weight_g": 100 },
+        { "label": "1 medium sweet potato", "weight_g": 160, "typical_use": "Standard" },
+        { "label": "1 large sweet potato", "weight_g": 220 }
+      ]
+    },
+
+    {
+      "food_code": "02004",
+      "food_name": "Banana, plantain, green, raw",
+      "food_group": "Starchy Roots, Tubers and Bananas",
+      "portions": [
+        { "label": "1 small green banana", "weight_g": 80 },
+        { "label": "1 medium green banana", "weight_g": 120 },
+        { "label": "1 large green banana", "weight_g": 160 }
+      ]
+    },
+
+    {
+      "food_code": "02016",
+      "food_name": "Taro (Arrowroot family), peeled",
+      "food_group": "Starchy Roots, Tubers and Bananas",
+      "portions": [
+        { "label": "Small piece", "weight_g": 80 },
+        { "label": "Medium piece (standard)", "weight_g": 140 },
+        { "label": "Large piece", "weight_g": 200 }
+      ]
+    },
+
+    {
+      "food_code": "08001",
+      "food_name": "Dagaa fish (omena), dried, raw",
+      "food_group": "Fish and Sea Foods",
+      "portions": [
+        { "label": "Small handful (dry)", "weight_g": 20, "typical_use": "Side protein" },
+        { "label": "Standard serving (dry)", "weight_g": 40 },
+        { "label": "Large serving (dry)", "weight_g": 60 }
+      ]
+    },
+
+    {
+      "food_code": "07001",
+      "food_name": "Beef, lean, raw",
+      "food_group": "Meats, Poultry and Eggs",
+      "portions": [
+        { "label": "Small serving (1 piece)", "weight_g": 60, "typical_use": "Light protein" },
+        { "label": "Medium serving (2 pieces)", "weight_g": 120, "typical_use": "Standard" },
+        { "label": "Large serving (3+ pieces)", "weight_g": 180 }
+      ]
+    },
+
+    {
+      "food_code": "07010",
+      "food_name": "Chicken, without skin",
+      "food_group": "Meats, Poultry and Eggs",
+      "portions": [
+        { "label": "1 drumstick (no bone)", "weight_g": 70 },
+        { "label": "1 thigh (no bone)", "weight_g": 90 },
+        { "label": "1 breast half (no bone)", "weight_g": 130, "typical_use": "Standard" }
+      ]
+    },
+
+    {
+      "food_code": "07030",
+      "food_name": "Egg, chicken, whole, raw",
+      "food_group": "Meats, Poultry and Eggs",
+      "portions": [
+        { "label": "1 small egg", "weight_g": 45 },
+        { "label": "1 medium egg", "weight_g": 55, "typical_use": "Standard" },
+        { "label": "1 large egg", "weight_g": 65 },
+        { "label": "2 eggs", "weight_g": 110 }
+      ]
+    },
+
+    {
+      "food_code": "06001",
+      "food_name": "Milk, cow, fresh, whole, raw",
+      "food_group": "Milk and Dairy Products",
+      "portions": [
+        { "label": "Teacup (250ml)", "weight_g": 255 },
+        { "label": "Glass (300ml)", "weight_g": 306 },
+        { "label": "Half litre (500ml)", "weight_g": 510 }
+      ]
+    },
+
+    {
+      "food_code": "06020",
+      "food_name": "Yoghurt, plain, whole",
+      "food_group": "Milk and Dairy Products",
+      "portions": [
+        { "label": "Small cup (150ml)", "weight_g": 155 },
+        { "label": "Standard cup (200ml)", "weight_g": 207 },
+        { "label": "Large cup (300ml)", "weight_g": 310 }
+      ]
+    },
+
+    {
+      "food_code": "06015",
+      "food_name": "Mala (Fermented Milk)",
+      "food_group": "Milk and Dairy Products",
+      "portions": [
+        { "label": "Small cup (200ml)", "weight_g": 200 },
+        { "label": "Standard teacup (250ml)", "weight_g": 250 },
+        { "label": "Large glass (350ml)", "weight_g": 350 }
+      ]
+    },
+
+    {
+      "food_code": "09001",
+      "food_name": "Cooking oil (sunflower/vegetable)",
+      "food_group": "Oils and Fats",
+      "portions": [
+        { "label": "1 teaspoon", "weight_g": 5 },
+        { "label": "1 tablespoon", "weight_g": 14, "typical_use": "Standard cooking amount" },
+        { "label": "2 tablespoons", "weight_g": 28 }
+      ]
+    },
+
+    {
+      "food_code": "10001",
+      "food_name": "Groundnuts (Peanuts), raw",
+      "food_group": "Nuts and Seeds",
+      "portions": [
+        { "label": "Small handful (~20 nuts)", "weight_g": 20 },
+        { "label": "Standard handful (~35 nuts)", "weight_g": 35 },
+        { "label": "2 tablespoons (shelled)", "weight_g": 30 }
+      ]
+    },
+
+    {
+      "food_code": "05001",
+      "food_name": "Banana, ripe",
+      "food_group": "Fruits and Fruit Products",
+      "portions": [
+        { "label": "1 small banana", "weight_g": 80 },
+        { "label": "1 medium banana", "weight_g": 120, "typical_use": "Standard" },
+        { "label": "1 large banana", "weight_g": 160 }
+      ]
+    },
+
+    {
+      "food_code": "05010",
+      "food_name": "Mango, ripe",
+      "food_group": "Fruits and Fruit Products",
+      "portions": [
+        { "label": "Half mango (flesh only)", "weight_g": 100 },
+        { "label": "1 small mango (flesh only)", "weight_g": 150 },
+        { "label": "1 medium mango (flesh only)", "weight_g": 200, "typical_use": "Standard" }
+      ]
+    },
+
+    {
+      "food_code": "05015",
+      "food_name": "Avocado",
+      "food_group": "Fruits and Fruit Products",
+      "portions": [
+        { "label": "Quarter avocado", "weight_g": 40 },
+        { "label": "Half avocado (flesh only)", "weight_g": 80, "typical_use": "Standard side" },
+        { "label": "Whole avocado (flesh only)", "weight_g": 160 }
+      ]
+    },
+
+    {
+      "food_code": "05020",
+      "food_name": "Papaya (Pawpaw)",
+      "food_group": "Fruits and Fruit Products",
+      "portions": [
+        { "label": "Small slice (flesh only)", "weight_g": 100 },
+        { "label": "Medium slice (flesh only)", "weight_g": 180 },
+        { "label": "Large slice (flesh only)", "weight_g": 250 }
+      ]
+    },
+
+    {
+      "food_code": "05025",
+      "food_name": "Watermelon",
+      "food_group": "Fruits and Fruit Products",
+      "portions": [
+        { "label": "Small slice (flesh only)", "weight_g": 150 },
+        { "label": "Medium slice (flesh only)", "weight_g": 250 },
+        { "label": "2 cups diced", "weight_g": 300 }
+      ]
+    },
+
+    {
+      "food_code": "12001",
+      "food_name": "Tea, black, brewed (no milk)",
+      "food_group": "Beverages",
+      "portions": [
+        { "label": "1 standard teacup (250ml)", "weight_g": 250 },
+        { "label": "1 mug (350ml)", "weight_g": 350 }
+      ]
+    }
+
+  ],
+
+  "generic_portion_guide": {
+    "description": "Use these estimates for any food not in the portions list above",
+    "by_food_type": [
+      {
+        "type": "Ugali / stiff porridge",
+        "portions": [
+          { "label": "Small piece", "weight_g": 150 },
+          { "label": "Medium piece (standard adult)", "weight_g": 250 },
+          { "label": "Large piece", "weight_g": 350 }
+        ]
+      },
+      {
+        "type": "Rice / pilau (cooked)",
+        "portions": [
+          { "label": "Half teacup", "weight_g": 100 },
+          { "label": "1 teacup", "weight_g": 200 },
+          { "label": "1.5 teacups", "weight_g": 300 }
+        ]
+      },
+      {
+        "type": "Chapati / flatbread",
+        "portions": [
+          { "label": "1 small", "weight_g": 60 },
+          { "label": "1 standard", "weight_g": 85 },
+          { "label": "1 large/thick", "weight_g": 110 }
+        ]
+      },
+      {
+        "type": "Stew / mchuzi (with sauce)",
+        "portions": [
+          { "label": "Small ladle", "weight_g": 100 },
+          { "label": "Medium ladle", "weight_g": 180 },
+          { "label": "Large ladle", "weight_g": 260 }
+        ]
+      },
+      {
+        "type": "Cooked vegetables / mboga",
+        "portions": [
+          { "label": "Small scoop (side)", "weight_g": 60 },
+          { "label": "Medium scoop", "weight_g": 100 },
+          { "label": "Large scoop", "weight_g": 150 }
+        ]
+      },
+      {
+        "type": "Legumes / beans / lentils (cooked)",
+        "portions": [
+          { "label": "Small bowl", "weight_g": 150 },
+          { "label": "Medium bowl (1 teacup)", "weight_g": 220 },
+          { "label": "Large bowl", "weight_g": 300 }
+        ]
+      },
+      {
+        "type": "Porridge / uji (thin, liquid)",
+        "portions": [
+          { "label": "Small cup (250ml)", "weight_g": 220 },
+          { "label": "Medium bowl (350ml)", "weight_g": 310 },
+          { "label": "Large bowl (500ml)", "weight_g": 440 }
+        ]
+      },
+      {
+        "type": "Meat / nyama (cooked, boneless)",
+        "portions": [
+          { "label": "1 piece", "weight_g": 70 },
+          { "label": "2 pieces", "weight_g": 140 },
+          { "label": "3 pieces", "weight_g": 210 }
+        ]
+      },
+      {
+        "type": "Fish (whole, cooked, with bones)",
+        "portions": [
+          { "label": "1 small fish", "weight_g": 150 },
+          { "label": "1 medium fish", "weight_g": 250 },
+          { "label": "1 large fish", "weight_g": 380 }
+        ]
+      },
+      {
+        "type": "Bread / mkate (sliced)",
+        "portions": [
+          { "label": "1 thin slice", "weight_g": 25 },
+          { "label": "1 standard slice", "weight_g": 35 },
+          { "label": "2 slices", "weight_g": 70 }
+        ]
+      },
+      {
+        "type": "Mandazi / mahamri / kaimati (fried dough)",
+        "portions": [
+          { "label": "1 small piece", "weight_g": 40 },
+          { "label": "1 standard piece", "weight_g": 60 },
+          { "label": "2 pieces", "weight_g": 120 }
+        ]
+      },
+      {
+        "type": "Milk / maziwa (liquid)",
+        "portions": [
+          { "label": "Small teacup (200ml)", "weight_g": 204 },
+          { "label": "Standard teacup (250ml)", "weight_g": 255 },
+          { "label": "Large glass (350ml)", "weight_g": 357 }
+        ]
+      },
+      {
+        "type": "Cooking oil / mafuta",
+        "portions": [
+          { "label": "1 teaspoon", "weight_g": 5 },
+          { "label": "1 tablespoon", "weight_g": 14 },
+          { "label": "2 tablespoons", "weight_g": 28 }
+        ]
+      },
+      {
+        "type": "Fruit (medium-sized, whole)",
+        "portions": [
+          { "label": "Half fruit (flesh only)", "weight_g": 80 },
+          { "label": "1 whole fruit (flesh only)", "weight_g": 150 },
+          { "label": "1 large fruit (flesh only)", "weight_g": 220 }
+        ]
+      }
+    ]
+  }
+}

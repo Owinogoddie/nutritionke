@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% block title %}Food Log — {{ APP_NAME }}{% endblock %}
+
+{% block content %}
+<div class="space-y-6 max-w-2xl">
+  <div>
+    <h1 class="text-2xl font-bold text-gray-800 dark:text-white">Food Log</h1>
+    <p class="text-gray-500 text-sm mt-1">{{ today|date:"l, j F" }}</p>
+  </div>
+
+  <div class="card flex justify-between items-center">
+    <div>
+      <p class="text-sm text-gray-500 dark:text-gray-400">Consumed today</p>
+      <p class="text-3xl font-bold text-orange-600">
+        {{ total_calories }}
+        <span class="text-base font-normal text-gray-400">/ {{ calorie_target }} kcal</span>
+      </p>
+    </div>
+    <div class="text-right">
+      <p class="text-sm text-gray-500">Remaining</p>
+      <p class="text-2xl font-bold text-green-600">
+        {{ calorie_target|add:"-"|add:total_calories }}
+      </p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 class="font-semibold text-gray-800 dark:text-white mb-4">Add Food</h2>
+    <div class="relative mb-4">
+      <input type="text" id="food-search" placeholder="Search Kenyan foods..." class="form-input pl-10" />
+      <svg class="w-4 h-4 text-gray-400 absolute left-3 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
+    </div>
+    <div id="search-results" class="hidden space-y-1 mb-4 max-h-48 overflow-y-auto border border-gray-100 dark:border-gray-700 rounded-xl"></div>
+
+    <form method="POST" id="log-form" class="hidden space-y-3">
+      {% csrf_token %}
+      <input type="hidden" name="food_id" id="selected-food-id" />
+      <div class="bg-orange-50 dark:bg-orange-900/20 rounded-xl p-3">
+        <p class="text-sm font-semibold text-orange-800 dark:text-orange-300" id="selected-food-name"></p>
+        <p class="text-xs text-orange-600 dark:text-orange-400" id="selected-food-kcal"></p>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Meal</label>
+        <select name="meal_type" class="form-input">
+          <option value="breakfast">Breakfast</option>
+          <option value="lunch" selected>Lunch</option>
+          <option value="dinner">Dinner</option>
+          <option value="snack">Snack</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Portion</label>
+        <select name="portion_id" id="portion-select" class="form-input mb-2">
+          <option value="">Loading portions...</option>
+        </select>
+        <p class="text-xs text-gray-400">or enter weight manually:</p>
+        <input type="number" name="custom_weight" placeholder="Weight in grams" class="form-input mt-1" step="1" min="1" />
+      </div>
+      <button type="submit" class="btn-primary w-full">Add to Log</button>
+      <button type="button" onclick="clearSelection()" class="btn-secondary w-full">Cancel</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h2 class="font-semibold text-gray-800 dark:text-white mb-4">Today's Entries</h2>
+
+    {% if logs %}
+      {% regroup logs by meal_type as meal_groups %}
+      
+      {% for meal in meal_groups %}
+        <div class="mb-4">
+          <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">
+            {{ meal.grouper|title }}
+          </p>
+          {% for log in meal.list %}
+            <div class="flex justify-between items-center py-2.5 border-b border-gray-50 dark:border-gray-700 last:border-0">
+              <div>
+                <p class="text-sm font-medium text-gray-700 dark:text-gray-200">{{ log.food.name }}</p>
+                <p class="text-xs text-gray-400">
+                  {{ log.weight_g }}g · P:{{ log.protein }}g C:{{ log.carbs }}g F:{{ log.fat }}g
+                </p>
+              </div>
+              <span class="text-sm font-bold text-orange-600">{{ log.calories }} kcal</span>
+            </div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+
+    {% else %}
+      <div class="text-center py-8 text-gray-400">
+        <p class="text-4xl mb-2">🥗</p>
+        <p class="text-sm">No food logged today yet</p>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  // Your existing JavaScript remains here...
+  let searchTimeout;
+  document.getElementById("food-search").addEventListener("input", function () {
+    clearTimeout(searchTimeout);
+    const q = this.value.trim();
+    if (q.length < 2) {
+      document.getElementById("search-results").classList.add("hidden");
+      return;
+    }
+    searchTimeout = setTimeout(() => {
+      fetch(`/nutrition/food-search/?q=${encodeURIComponent(q)}`)
+        .then((r) => r.json())
+        .then((data) => {
+          const container = document.getElementById("search-results");
+          container.innerHTML = "";
+          if (data.results.length === 0) {
+            container.innerHTML = '<p class="text-sm text-gray-400 p-3">No foods found</p>';
+          } else {
+            data.results.forEach((food) => {
+              const div = document.createElement("div");
+              div.className = "flex justify-between items-center px-4 py-2.5 hover:bg-orange-50 dark:hover:bg-gray-700 cursor-pointer transition-colors";
+              div.innerHTML = `
+                <div>
+                  <p class="text-sm font-medium text-gray-700 dark:text-gray-200">${food.name}</p>
+                  <p class="text-xs text-gray-400">${food.group}</p>
+                </div>
+                <span class="text-xs text-orange-600 font-semibold">${food.kcal} kcal/100g</span>`;
+              div.addEventListener("click", () => selectFood(food));
+              container.appendChild(div);
+            });
+          }
+          container.classList.remove("hidden");
+        });
+    }, 300);
+  });
+
+  function selectFood(food) {
+    document.getElementById("selected-food-id").value = food.id;
+    document.getElementById("selected-food-name").textContent = food.name;
+    document.getElementById("selected-food-kcal").textContent = `${food.kcal} kcal per 100g`;
+    document.getElementById("search-results").classList.add("hidden");
+    document.getElementById("food-search").value = food.name;
+    document.getElementById("log-form").classList.remove("hidden");
+
+    fetch(`/nutrition/portions/${food.id}/`)
+      .then((r) => r.json())
+      .then((data) => {
+        const select = document.getElementById("portion-select");
+        select.innerHTML = '<option value="">-- Choose a portion --</option>';
+        data.portions.forEach((p) => {
+          const opt = document.createElement("option");
+          opt.value = p.id;
+          opt.textContent = `${p.label} (${p.weight_g}g)`;
+          select.appendChild(opt);
+        });
+        if (data.portions.length === 0) {
+          select.innerHTML = '<option value="">No standard portions — enter weight below</option>';
+        }
+      });
+  }
+
+  function clearSelection() {
+    document.getElementById("log-form").classList.add("hidden");
+    document.getElementById("food-search").value = "";
+  }
+</script>
+{% endblock %}

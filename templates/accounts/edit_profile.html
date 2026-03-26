@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+{% block title %}Edit Profile — {{ APP_NAME }}{% endblock %}
+
+{% block content %}
+<div class="max-w-lg mx-auto py-10 px-4">
+  <div class="flex items-center gap-3 mb-8">
+    <a href="{% url 'accounts:profile' %}" class="text-gray-400 hover:text-orange-500 transition-colors text-lg">←</a>
+    <div>
+      <h1 class="text-2xl font-bold text-gray-800 dark:text-white">Edit Profile</h1>
+      <p class="text-gray-500 dark:text-gray-400 mt-0.5 text-sm">Update your personal details and health info</p>
+    </div>
+  </div>
+
+  <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border border-orange-100 dark:border-gray-700">
+    {% include 'components/flash_messages.html' %}
+
+    <form method="POST" enctype="multipart/form-data" class="space-y-5">
+      {% csrf_token %}
+
+      <!-- Name -->
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">First Name</label>
+          <input
+            type="text"
+            name="first_name"
+            value="{{ user.first_name }}"
+            class="form-input"
+            placeholder="First name"
+          />
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Last Name</label>
+          <input
+            type="text"
+            name="last_name"
+            value="{{ user.last_name }}"
+            class="form-input"
+            placeholder="Last name"
+          />
+        </div>
+      </div>
+
+      <!-- Goal -->
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+          What's your goal?
+        </label>
+        <div class="grid grid-cols-2 gap-3">
+          {% for value, label in form.fields.goal.choices %}
+            {% if value %}
+              <label class="goal-option cursor-pointer">
+                <input
+                  type="radio"
+                  name="goal"
+                  value="{{ value }}"
+                  class="sr-only peer"
+                  {% if form.goal.value == value %}checked{% endif %}
+                />
+                <div class="p-3 rounded-xl border-2 border-gray-200 dark:border-gray-600 text-center text-sm font-medium hover:border-orange-400 transition-colors peer-checked:border-orange-500 peer-checked:bg-orange-50 dark:peer-checked:bg-orange-900/20 dark:text-gray-300">
+                  {{ label }}
+                </div>
+              </label>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Sex -->
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Sex</label>
+        {{ form.sex }}
+      </div>
+
+      <!-- Date of Birth -->
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Date of Birth</label>
+        {{ form.date_of_birth }}
+      </div>
+
+      <!-- Weight & Height -->
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Weight (kg)</label>
+          {{ form.weight_kg }}
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Height (cm)</label>
+          {{ form.height_cm }}
+        </div>
+      </div>
+
+      <!-- Activity Level -->
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Activity Level</label>
+        {{ form.activity_level }}
+      </div>
+
+      <!-- Health Conditions -->
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+          Any health conditions?
+          <span class="font-normal text-gray-400">(optional)</span>
+        </label>
+        <div class="space-y-2 bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4">
+          <label class="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300 cursor-pointer">
+            <input
+              type="checkbox"
+              name="{{ form.has_diabetes.html_name }}"
+              {% if form.has_diabetes.value %}checked{% endif %}
+              class="w-4 h-4 rounded border-gray-300 text-orange-500 focus:ring-orange-400 focus:ring-2 accent-orange-500"
+            />
+            Diabetes
+          </label>
+          <label class="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300 cursor-pointer">
+            <input
+              type="checkbox"
+              name="{{ form.has_hypertension.html_name }}"
+              {% if form.has_hypertension.value %}checked{% endif %}
+              class="w-4 h-4 rounded border-gray-300 text-orange-500 focus:ring-orange-400 focus:ring-2 accent-orange-500"
+            />
+            Hypertension (High blood pressure)
+          </label>
+          <label class="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300 cursor-pointer">
+            <input
+              type="checkbox"
+              name="{{ form.has_obesity.html_name }}"
+              {% if form.has_obesity.value %}checked{% endif %}
+              class="w-4 h-4 rounded border-gray-300 text-orange-500 focus:ring-orange-400 focus:ring-2 accent-orange-500"
+            />
+            Obesity
+          </label>
+          <label class="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300 cursor-pointer">
+            <input
+              type="checkbox"
+              name="{{ form.is_pregnant.html_name }}"
+              {% if form.is_pregnant.value %}checked{% endif %}
+              class="w-4 h-4 rounded border-gray-300 text-orange-500 focus:ring-orange-400 focus:ring-2 accent-orange-500"
+            />
+            Pregnant
+          </label>
+        </div>
+      </div>
+
+      <!-- Avatar Upload -->
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+          Profile Photo <span class="font-normal text-gray-400">(optional)</span>
+        </label>
+        {% if user.avatar %}
+        <div class="flex items-center gap-3 mb-2">
+          <img src="{{ user.avatar.url }}" alt="Current avatar" class="w-10 h-10 rounded-full object-cover" />
+          <span class="text-xs text-gray-400">Current photo</span>
+        </div>
+        {% endif %}
+        <input
+          type="file"
+          name="avatar"
+          accept="image/*"
+          class="block w-full text-sm text-gray-500 dark:text-gray-400
+            file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0
+            file:text-sm file:font-semibold file:bg-orange-50 file:text-orange-600
+            hover:file:bg-orange-100 dark:file:bg-orange-900/20 dark:file:text-orange-400"
+        />
+      </div>
+
+      <!-- Actions -->
+      <div class="flex gap-3 pt-2">
+        <button
+          type="submit"
+          class="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-xl transition-colors shadow-sm"
+        >
+          Save Changes
+        </button>
+        <a
+          href="{% url 'accounts:profile' %}"
+          class="flex-1 text-center border-2 border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300 font-semibold py-3 rounded-xl hover:border-gray-300 transition-colors"
+        >
+          Cancel
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

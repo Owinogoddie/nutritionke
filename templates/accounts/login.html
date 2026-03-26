@@ -1,0 +1,83 @@
+{% extends 'base.html' %} {% block auth_content %}
+<div
+  class="min-h-screen bg-linear-to-br from-orange-50 to-amber-50 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4"
+>
+  <div class="w-full max-w-md">
+    <!-- Logo -->
+    <div class="text-center mb-8">
+      <h1 class="text-2xl font-bold text-gray-800 dark:text-white">
+        {{ APP_NAME }}
+      </h1>
+      <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">
+        {{ APP_TAGLINE }}
+      </p>
+    </div>
+
+    <!-- Card -->
+    <div
+      class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border border-orange-100 dark:border-gray-700"
+    >
+      <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-1">
+        Welcome back
+      </h2>
+      <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">
+        Sign in to your account
+      </p>
+
+      {% include 'components/flash_messages.html' %}
+
+      <form method="POST" class="space-y-4">
+        {% csrf_token %}
+
+        <div>
+          <label
+            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
+            Email Address
+          </label>
+          {{ form.username }} {% if form.username.errors %}
+          <p class="text-red-500 text-xs mt-1">{{ form.username.errors.0 }}</p>
+          {% endif %}
+        </div>
+
+        <div>
+          <div class="flex justify-between items-center mb-1">
+            <label
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
+              Password
+            </label>
+            <a href="#" class="text-xs text-orange-500 hover:underline"
+              >Forgot password?</a
+            >
+          </div>
+          {{ form.password }} {% if form.password.errors %}
+          <p class="text-red-500 text-xs mt-1">{{ form.password.errors.0 }}</p>
+          {% endif %}
+        </div>
+
+        <!-- Non-field errors (e.g. wrong credentials) -->
+        {% if form.non_field_errors %}
+        <p class="text-red-500 text-xs -mt-1">{{ form.non_field_errors.0 }}</p>
+        {% endif %}
+
+        <button
+          type="submit"
+          class="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-4 rounded-xl transition-colors duration-200 shadow-sm mt-2"
+        >
+          Sign In
+        </button>
+      </form>
+
+      <p class="text-center text-sm text-gray-500 dark:text-gray-400 mt-6">
+        Don't have an account?
+        <a
+          href="{% url 'accounts:register' %}"
+          class="text-orange-600 dark:text-orange-400 font-medium hover:underline"
+          >Create one free</a
+        >
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load nutrition_tags %}
+{% block title %}Meal Plan — {{ APP_NAME }}{% endblock %}
+
+{% block content %}
+{% meal_slots as meal_slots %}
+<div class="space-y-6 max-w-3xl">
+
+  <!-- Header -->
+  <div class="flex justify-between items-start">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-800 dark:text-white">Today's Meal Plan</h1>
+      <p class="text-gray-500 text-sm mt-1">{{ today|date:"l, j F Y" }}</p>
+    </div>
+    <form method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="regenerate" />
+      <button type="submit" class="btn-secondary flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+        Regenerate
+      </button>
+    </form>
+  </div>
+
+  <!-- Plan Totals -->
+  <div class="card">
+    <p class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3">Plan Summary</p>
+    <div class="grid grid-cols-4 gap-4 text-center">
+      <div>
+        <p class="text-2xl font-bold text-orange-600">{{ plan.total_calories }}</p>
+        <p class="text-xs text-gray-400 mt-0.5">kcal</p>
+      </div>
+      <div>
+        <p class="text-2xl font-bold text-blue-600">{{ plan.total_protein }}g</p>
+        <p class="text-xs text-gray-400 mt-0.5">Protein</p>
+      </div>
+      <div>
+        <p class="text-2xl font-bold text-amber-600">{{ plan.total_carbs }}g</p>
+        <p class="text-xs text-gray-400 mt-0.5">Carbs</p>
+      </div>
+      <div>
+        <p class="text-2xl font-bold text-red-500">{{ plan.total_fat }}g</p>
+        <p class="text-xs text-gray-400 mt-0.5">Fat</p>
+      </div>
+    </div>
+
+    <!-- Calorie bar -->
+    <div class="mt-4">
+      <div class="flex justify-between text-xs text-gray-400 mb-1">
+        <span>{{ plan.total_calories }} kcal planned</span>
+        <span>Target: {{ calorie_target }} kcal</span>
+      </div>
+      <div class="macro-bar">
+        {% widthratio plan.total_calories calorie_target 100 as pct %}
+        <div class="macro-fill bg-orange-500" style="width: {{ pct }}%"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Meal Sections -->
+  {% for meal_type, label, emoji in meal_slots %}
+  {% with items=meals|get_item:meal_type %}
+  {% if items %}
+  <div class="card">
+    <div class="flex items-center gap-2 mb-4">
+      <span class="text-2xl">{{ emoji }}</span>
+      <div>
+        <h2 class="font-semibold text-gray-800 dark:text-white">{{ label }}</h2>
+        <p class="text-xs text-gray-400">
+          {% for item in items %}{{ item.calories|floatformat:0 }}{% if not forloop.last %} + {% endif %}{% endfor %} kcal
+        </p>
+      </div>
+    </div>
+
+    <div class="space-y-3">
+      {% for item in items %}
+      <div class="flex justify-between items-center p-3 bg-orange-50 dark:bg-gray-700/50 rounded-xl">
+        <div class="flex-1">
+          <p class="text-sm font-medium text-gray-700 dark:text-gray-200">{{ item.food.name }}</p>
+          <p class="text-xs text-gray-400 mt-0.5">
+            {% if item.portion %}{{ item.portion.label }}{% else %}{{ item.weight_g }}g{% endif %} · P:{{ item.protein }}g C:{{ item.carbs }}g F:{{ item.fat }}g
+          </p>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-sm font-bold text-orange-600">{{ item.calories|floatformat:0 }} kcal</span>
+          <form method="POST" action="{% url 'nutrition:log_from_plan' %}">
+            {% csrf_token %}
+            <input type="hidden" name="item_id" value="{{ item.id }}" />
+            <button type="submit" class="text-xs bg-orange-500 hover:bg-orange-600 text-white px-3 py-1.5 rounded-lg transition-colors">
+              Log it
+            </button>
+          </form>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+  {% endwith %}
+  {% endfor %}
+
+  <!-- Health note if conditions present -->
+  {% if user.has_diabetes or user.has_hypertension %}
+  <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl p-4">
+    <div class="flex gap-3">
+      <span class="text-xl">🩺</span>
+      <div>
+        <p class="text-sm font-semibold text-blue-800 dark:text-blue-300">Personalised for your health</p>
+        <p class="text-sm text-blue-700 dark:text-blue-400 mt-0.5">
+          {% if user.has_diabetes %}This plan uses lower-GI foods to help manage blood sugar. {% endif %}
+          {% if user.has_hypertension %}Lower-sodium options have been selected for your meals.{% endif %}
+        </p>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+</div>
+{% endblock %}

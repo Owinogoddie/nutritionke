@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block content %}
+<div class="max-w-md mx-auto text-center py-16">
+  <div class="text-6xl mb-4">🥗</div>
+  <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-2">
+    Complete your profile first
+  </h2>
+  <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">
+    We need your age, weight, height and goal to generate a personalised meal
+    plan for you.
+  </p>
+  <a href="{% url 'accounts:setup_profile' %}" class="btn-primary">
+    Complete Profile
+  </a>
+</div>
+{% endblock %}

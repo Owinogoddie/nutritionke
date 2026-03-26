@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+{% block title %}Progress — {{ APP_NAME }}{% endblock %}
+
+{% block content %}
+<div class="space-y-6 max-w-3xl">
+  <div>
+    <h1 class="text-2xl font-bold text-gray-800 dark:text-white">Your Progress</h1>
+    <p class="text-gray-500 text-sm mt-1">Last 30 days</p>
+  </div>
+
+  <!-- Stats Row -->
+  <div class="grid grid-cols-3 gap-4">
+    <div class="stat-card text-center">
+      <p class="text-3xl font-bold text-orange-600">{{ logged_days }}</p>
+      <p class="text-xs text-gray-400 mt-1">Days logged</p>
+    </div>
+    <div class="stat-card text-center">
+      <p class="text-3xl font-bold text-blue-600">{{ avg_calories }}</p>
+      <p class="text-xs text-gray-400 mt-1">Avg kcal/day</p>
+    </div>
+    <div class="stat-card text-center">
+      <p class="text-3xl font-bold text-green-600">
+        {% if latest_weight %}{{ latest_weight.weight_kg }}{% else %}—{% endif %}
+      </p>
+      <p class="text-xs text-gray-400 mt-1">Current weight (kg)</p>
+    </div>
+  </div>
+
+  <!-- Calorie Chart -->
+  <div class="card">
+    <h2 class="font-semibold text-gray-800 dark:text-white mb-4">Calories — Last 30 Days</h2>
+    <div class="relative h-48">
+      <canvas id="calorieChart" data-chart="{{ calorie_data_json }}"></canvas>
+    </div>
+  </div>
+
+  <!-- Weight Chart -->
+  <div class="card">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="font-semibold text-gray-800 dark:text-white">Weight Over Time</h2>
+      <button
+        onclick="document.getElementById('weight-form').classList.toggle('hidden')"
+        class="btn-secondary text-xs"
+      >
+        + Log Weight
+      </button>
+    </div>
+
+    <form
+      method="POST"
+      action="{% url 'nutrition:log_weight' %}"
+      id="weight-form"
+      class="hidden mb-4 p-4 bg-orange-50 dark:bg-gray-700/50 rounded-xl"
+    >
+      {% csrf_token %}
+      <div class="flex gap-3 items-end">
+        <div class="flex-1">
+          <label class="block text-xs font-medium text-gray-600 dark:text-gray-300 mb-1">
+            Today's weight (kg)
+          </label>
+          <input
+            type="number"
+            name="weight_kg"
+            step="0.1"
+            min="20"
+            max="300"
+            placeholder="e.g. 72.5"
+            class="form-input"
+          />
+        </div>
+        <button type="submit" class="btn-primary">Save</button>
+      </div>
+    </form>
+
+    {% if weight_data_json != '[]' %}
+    <div class="relative h-48">
+      <canvas id="weightChart" data-chart="{{ weight_data_json }}"></canvas>
+    </div>
+    {% else %}
+    <div class="text-center py-8 text-gray-400">
+      <p class="text-3xl mb-2">⚖️</p>
+      <p class="text-sm">No weight logs yet. Start tracking to see your progress.</p>
+    </div>
+    {% endif %}
+  </div>
+
+  {% if weight_logs %}
+  <div class="card">
+    <h2 class="font-semibold text-gray-800 dark:text-white mb-4">Weight History</h2>
+    <div class="space-y-2">
+      {% for log in weight_logs reversed %}
+      <div class="flex justify-between items-center py-2 border-b border-gray-50 dark:border-gray-700 last:border-0">
+        <span class="text-sm text-gray-600 dark:text-gray-300">{{ log.date|date:"j M Y" }}</span>
+        <span class="text-sm font-bold text-gray-800 dark:text-white">{{ log.weight_kg }} kg</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+  const isDark = document.documentElement.classList.contains('dark');
+  const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+  const textColor = isDark ? '#9ca3af' : '#6b7280';
+
+  // Calorie chart
+  const calorieCanvas = document.getElementById('calorieChart');
+  const calorieData = JSON.parse(calorieCanvas.dataset.chart);
+
+  new Chart(calorieCanvas, {
+    type: 'bar',
+    data: {
+      labels: calorieData.map(d => d.date),
+      datasets: [
+        {
+          label: 'Calories',
+          data: calorieData.map(d => d.calories),
+          backgroundColor: 'rgba(249, 115, 22, 0.7)',
+          borderRadius: 6,
+          borderSkipped: false,
+        },
+        {
+          label: 'Target',
+          data: calorieData.map(d => d.target),
+          type: 'line',
+          borderColor: 'rgba(234, 179, 8, 0.8)',
+          borderWidth: 2,
+          borderDash: [5, 5],
+          pointRadius: 0,
+          fill: false,
+          tension: 0,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ` ${ctx.parsed.y} kcal` } }
+      },
+      scales: {
+        x: {
+          grid: { color: gridColor },
+          ticks: { color: textColor, maxTicksLimit: 10, font: { size: 11 } }
+        },
+        y: {
+          grid: { color: gridColor },
+          ticks: { color: textColor, font: { size: 11 } }
+        }
+      }
+    }
+  });
+
+  // Weight chart
+  const weightCanvas = document.getElementById('weightChart');
+  if (weightCanvas) {
+    const weightData = JSON.parse(weightCanvas.dataset.chart);
+    if (weightData.length > 0) {
+      new Chart(weightCanvas, {
+        type: 'line',
+        data: {
+          labels: weightData.map(d => d.date),
+          datasets: [{
+            label: 'Weight (kg)',
+            data: weightData.map(d => d.weight),
+            borderColor: 'rgb(59, 130, 246)',
+            backgroundColor: 'rgba(59, 130, 246, 0.08)',
+            borderWidth: 2.5,
+            pointBackgroundColor: 'rgb(59, 130, 246)',
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            tension: 0.3,
+            fill: true,
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: { label: ctx => ` ${ctx.parsed.y} kg` } }
+          },
+          scales: {
+            x: { grid: { color: gridColor }, ticks: { color: textColor, font: { size: 11 } } },
+            y: {
+              grid: { color: gridColor },
+              ticks: { color: textColor, font: { size: 11 }, callback: val => `${val} kg` }
+            }
+          }
+        }
+      });
+    }
+  }
+</script>
+{% endblock %}

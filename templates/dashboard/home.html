@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard — {{ APP_NAME }}{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+  <!-- Header -->
+  <div>
+    <h1 class="text-2xl font-bold text-gray-800 dark:text-white">
+      {% now "G" as hour %}
+      Good {% if hour < "12" %}morning{% elif hour < "17" %}afternoon{% else %}evening{% endif %}, {{ user.first_name }} 👋
+    </h1>
+    <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">
+      {{ today|date:"l, j F Y" }}
+    </p>
+  </div>
+
+  <!-- Calorie Summary Card -->
+  <div class="card">
+    <div class="flex justify-between items-start mb-4">
+      <div>
+        <p class="text-sm text-gray-500 dark:text-gray-400">Calories today</p>
+        <div class="flex items-baseline gap-2 mt-1">
+          <span class="text-4xl font-bold text-orange-600">{{ consumed_calories }}</span>
+          <span class="text-gray-400 text-sm">/ {{ calorie_target }} kcal</span>
+        </div>
+      </div>
+      <div class="text-right">
+        <p class="text-sm text-gray-500 dark:text-gray-400">Remaining</p>
+        <p class="text-2xl font-bold text-green-600 dark:text-green-400">{{ remaining_calories }}</p>
+        <p class="text-xs text-gray-400">kcal left</p>
+      </div>
+    </div>
+    <div class="macro-bar">
+      <div class="macro-fill bg-orange-500" style="width: {{ calorie_pct }}%"></div>
+    </div>
+  </div>
+
+  <!-- Macro Cards -->
+  <div class="grid grid-cols-3 gap-4">
+    <div class="stat-card">
+      <div class="flex justify-between items-center">
+        <span class="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wide">Protein</span>
+        <span class="text-xs text-gray-400">{{ protein_pct }}%</span>
+      </div>
+      <p class="text-xl font-bold text-gray-800 dark:text-white mt-1">
+        {{ consumed_protein }}<span class="text-sm font-normal text-gray-400">g</span>
+      </p>
+      <p class="text-xs text-gray-400">of {{ protein_target }}g</p>
+      <div class="macro-bar mt-2">
+        <div class="macro-fill bg-blue-500" style="width: {{ protein_pct }}%"></div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="flex justify-between items-center">
+        <span class="text-xs font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-wide">Carbs</span>
+        <span class="text-xs text-gray-400">{{ carbs_pct }}%</span>
+      </div>
+      <p class="text-xl font-bold text-gray-800 dark:text-white mt-1">
+        {{ consumed_carbs }}<span class="text-sm font-normal text-gray-400">g</span>
+      </p>
+      <p class="text-xs text-gray-400">of {{ carbs_target }}g</p>
+      <div class="macro-bar mt-2">
+        <div class="macro-fill bg-amber-500" style="width: {{ carbs_pct }}%"></div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="flex justify-between items-center">
+        <span class="text-xs font-semibold text-red-500 dark:text-red-400 uppercase tracking-wide">Fat</span>
+        <span class="text-xs text-gray-400">{{ fat_pct }}%</span>
+      </div>
+      <p class="text-xl font-bold text-gray-800 dark:text-white mt-1">
+        {{ consumed_fat }}<span class="text-sm font-normal text-gray-400">g</span>
+      </p>
+      <p class="text-xs text-gray-400">of {{ fat_target }}g</p>
+      <div class="macro-bar mt-2">
+        <div class="macro-fill bg-red-500" style="width: {{ fat_pct }}%"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Today's Logs -->
+  <div class="card">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="font-semibold text-gray-800 dark:text-white">Today's Food Log</h2>
+      <a href="{% url 'nutrition:food_log' %}" class="btn-secondary text-xs">+ Log Food</a>
+    </div>
+    {% if logs %}
+    <div class="space-y-2">
+      {% for log in logs %}
+      <div class="flex justify-between items-center py-2 border-b border-gray-50 dark:border-gray-700 last:border-0">
+        <div>
+          <p class="text-sm font-medium text-gray-700 dark:text-gray-200">{{ log.food.name }}</p>
+          <p class="text-xs text-gray-400">{{ log.get_meal_type_display }} · {{ log.weight_g }}g</p>
+        </div>
+        <span class="text-sm font-semibold text-orange-600">{{ log.calories }} kcal</span>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-8 text-gray-400">
+      <p class="text-3xl mb-2">🍽️</p>
+      <p class="text-sm">Nothing logged yet today</p>
+      <a href="{% url 'nutrition:food_log' %}" class="btn-primary mt-3 inline-block">Log your first meal</a>
+    </div>
+    {% endif %}
+  </div>
+
+  {% if user.daily_calorie_target %}
+  <div class="bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-2xl p-4 flex gap-3">
+    <span class="text-2xl">💡</span>
+    <div>
+      <p class="text-sm font-semibold text-orange-800 dark:text-orange-300">Your daily target</p>
+      <p class="text-sm text-orange-700 dark:text-orange-400 mt-0.5">
+        Based on your profile, you need <strong>{{ calorie_target }} kcal/day</strong> to {{ user.get_goal_display|lower }}.
+      </p>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- 7-Day Calorie Trend -->
+  <div class="card">
+    <h2 class="font-semibold text-gray-800 dark:text-white mb-4">This Week</h2>
+    <div class="relative h-32">
+      <canvas id="weekChart" data-chart="{{ seven_days_json }}"></canvas>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+  const isDark = document.documentElement.classList.contains('dark');
+  const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+  const textColor = isDark ? '#9ca3af' : '#6b7280';
+
+  const weekCanvas = document.getElementById('weekChart');
+  const weekData = JSON.parse(weekCanvas.dataset.chart);
+
+  new Chart(weekCanvas, {
+    type: 'bar',
+    data: {
+      labels: weekData.map(d => d.date),
+      datasets: [{
+        data: weekData.map(d => d.calories),
+        backgroundColor: weekData.map((d, i) =>
+          i === weekData.length - 1
+            ? 'rgba(249, 115, 22, 0.9)'
+            : 'rgba(249, 115, 22, 0.35)'
+        ),
+        borderRadius: 6,
+        borderSkipped: false,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: textColor, font: { size: 11 } } },
+        y: { grid: { color: gridColor }, ticks: { color: textColor, font: { size: 11 } } }
+      }
+    }
+  });
+</script>
+{% endblock %}

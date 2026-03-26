@@ -1,0 +1,189 @@
+/* ── Form Inputs ──────────────────────────────────────────────────────── */
+.form-input {
+  width: 100%;
+  padding: 0.625rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid #e5e7eb;
+  background-color: #fff;
+  color: #1f2937;
+  font-size: 0.875rem;
+  transition: all 0.15s ease;
+  outline: none;
+  display: block;
+}
+
+.form-input:focus {
+  border-color: transparent;
+  box-shadow: 0 0 0 2px #fb923c;
+}
+
+/* ── Sidebar Links ────────────────────────────────────────────────────── */
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4b5563;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  margin-bottom: 0.125rem;
+}
+
+.sidebar-link:hover {
+  background-color: #fff7ed;
+  color: #c2410c;
+}
+
+.sidebar-link.active {
+  background-color: #fff7ed;
+  color: #c2410c;
+  font-weight: 600;
+}
+
+/* ── Cards ────────────────────────────────────────────────────────────── */
+.card {
+  background-color: #fff;
+  border-radius: 1rem;
+  border: 1px solid #ffedd5;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+}
+
+/* ── Stat Cards ───────────────────────────────────────────────────────── */
+.stat-card {
+  background-color: #fff;
+  border-radius: 1rem;
+  border: 1px solid #ffedd5;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* ── Buttons ──────────────────────────────────────────────────────────── */
+.btn-primary {
+  background-color: #f97316;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  display: inline-block;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background-color: #ea580c;
+}
+
+.btn-secondary {
+  background-color: #fff7ed;
+  color: #c2410c;
+  font-weight: 600;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  background-color: #ffedd5;
+}
+
+/* ── Macro Progress Bar ───────────────────────────────────────────────── */
+.macro-bar {
+  height: 0.5rem;
+  border-radius: 9999px;
+  overflow: hidden;
+  background-color: #f3f4f6;
+}
+
+.macro-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: all 0.5s ease;
+}
+
+/* ── Select & Date inputs ─────────────────────────────────────────────── */
+select.form-input {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+  padding-right: 2.5rem;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   DARK MODE
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Form inputs */
+.dark .form-input {
+  background-color: #374151;
+  border-color: #4b5563;
+  color: #f3f4f6;
+}
+
+.dark .form-input:focus {
+  box-shadow: 0 0 0 2px #f97316;
+  border-color: transparent;
+}
+
+.dark select.form-input {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239ca3af'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+}
+
+/* Sidebar */
+.dark .sidebar-link {
+  color: #9ca3af;
+}
+
+.dark .sidebar-link:hover {
+  background-color: #374151;
+  color: #fb923c;
+}
+
+.dark .sidebar-link.active {
+  background-color: rgba(251, 146, 60, 0.15);
+  color: #fb923c;
+  font-weight: 600;
+}
+
+/* Cards */
+.dark .card {
+  background-color: #1f2937;
+  border-color: #374151;
+}
+
+.dark .stat-card {
+  background-color: #1f2937;
+  border-color: #374151;
+}
+
+/* Buttons */
+.dark .btn-secondary {
+  background-color: rgba(251, 146, 60, 0.15);
+  color: #fb923c;
+}
+
+.dark .btn-secondary:hover {
+  background-color: rgba(251, 146, 60, 0.25);
+}
+
+/* Macro bar */
+.dark .macro-bar {
+  background-color: #374151;
+}
