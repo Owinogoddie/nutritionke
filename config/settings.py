@@ -15,6 +15,7 @@ APP_VERSION = os.getenv('APP_VERSION', '1.0.0')
 EXERCISES_API_KEY = os.getenv('EXERCISES_API_KEY', 'ek_7db8d4dc3fe443498f5d09608092de7d')
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost').split(',')
+CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS', '').split(',')
 
 # ─── Apps ─────────────────────────────────────────────────────────────────────
 INSTALLED_APPS = [
