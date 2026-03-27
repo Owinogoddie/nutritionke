@@ -67,11 +67,14 @@ def home(request):
 def progress(request):
     user = request.user
     today = timezone.localdate()
-    thirty_days_ago = today - timedelta(days=29)
 
-    # Weight logs (oldest → newest for chart)
-    weight_logs = WeightLog.objects.filter(user=user).order_by('date')[:30]
-    latest_weight = weight_logs.last()
+    weight_logs_asc = WeightLog.objects.filter(user=user).order_by('date')[:30]
+
+    # Newest → oldest for the history table
+    weight_logs = WeightLog.objects.filter(user=user).order_by('-date')[:30]
+
+    # Separate unsliced query — .first() is safe here
+    latest_weight = WeightLog.objects.filter(user=user).order_by('-date').first()
 
     # Calorie logs per day for last 30 days
     calorie_target = user.daily_calorie_target or 2000
@@ -96,11 +99,11 @@ def progress(request):
 
     weight_data = [
         {'date': w.date.strftime('%-d %b'), 'weight': float(w.weight_kg)}
-        for w in weight_logs
+        for w in weight_logs_asc
     ]
 
     context = {
-        'weight_logs':       weight_logs,
+        'weight_logs':       weight_logs,       # newest-first, for the history table
         'latest_weight':     latest_weight,
         'logged_days':       logged_days,
         'avg_calories':      avg_calories,

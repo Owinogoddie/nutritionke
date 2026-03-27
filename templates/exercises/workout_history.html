@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Workout History — {{ APP_NAME }}{% endblock %}
+
+{% block content %}
+<div class="space-y-6 max-w-3xl">
+  <div>
+    <h1 class="text-2xl font-bold text-gray-800 dark:text-white">Workout History</h1>
+    <p class="text-gray-500 text-sm mt-1">Your last 30 logged exercises</p>
+  </div>
+
+  {% if logs %}
+  <div class="card">
+    <div class="space-y-2">
+      {% for log in logs %}
+      <div class="flex justify-between items-center py-2 border-b border-gray-50 dark:border-gray-700 last:border-0">
+        <div>
+          <p class="text-sm font-medium text-gray-700 dark:text-gray-200 capitalize">{{ log.exercise_name }}</p>
+          <p class="text-xs text-gray-400">{{ log.body_part }} · {{ log.date }}</p>
+        </div>
+        <span class="text-sm font-semibold text-orange-600">{{ log.sets }}×{{ log.reps }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% else %}
+  <div class="card text-center py-12 text-gray-400">
+    <p class="text-4xl mb-3">📋</p>
+    <p class="text-sm">No workouts logged yet.</p>
+    <a href="{% url 'exercises:workout_plan' %}" class="btn-primary mt-4 inline-block">Start today's plan</a>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

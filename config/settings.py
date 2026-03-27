@@ -12,6 +12,7 @@ DEBUG = os.getenv('DEBUG', 'True') == 'True'
 APP_NAME = os.getenv('APP_NAME', 'NutriKe')
 APP_TAGLINE = os.getenv('APP_TAGLINE', 'Eat well. Live well.')
 APP_VERSION = os.getenv('APP_VERSION', '1.0.0')
+EXERCISES_API_KEY = os.getenv('EXERCISES_API_KEY', 'ek_7db8d4dc3fe443498f5d09608092de7d')
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost').split(',')
 
@@ -31,7 +32,13 @@ INSTALLED_APPS = [
     'apps.accounts',
     'apps.nutrition',
     'apps.dashboard',
+    'apps.exercises',
 ]
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block title %}{{ exercise.name|title }} — {{ APP_NAME }}{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl space-y-6">
+
+  <!-- Back button -->
+  <a href="{% url 'exercises:workout_plan' %}"
+     class="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-orange-600 transition-colors">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+    </svg>
+    Back to Workout Plan
+  </a>
+
+  <!-- GIF + Title -->
+  <div class="card">
+    <div class="flex flex-col sm:flex-row gap-6 items-start">
+      <img
+        src="{{ exercise.gifUrl }}"
+        alt="{{ exercise.name }}"
+        class="w-full sm:w-48 h-48 object-cover rounded-xl bg-gray-100 shrink-0"
+      />
+      <div class="flex-1">
+        <h1 class="text-2xl font-bold text-gray-800 dark:text-white capitalize mb-3">
+          {{ exercise.name }}
+        </h1>
+        <!-- Badges -->
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span class="px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 text-xs font-semibold rounded-full capitalize">
+            {{ exercise.bodyPart }}
+          </span>
+          <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs font-semibold rounded-full capitalize">
+            {{ exercise.equipment }}
+          </span>
+          <span class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-xs font-semibold rounded-full capitalize">
+            {{ exercise.difficulty }}
+          </span>
+          <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-xs font-semibold rounded-full capitalize">
+            {{ exercise.category }}
+          </span>
+        </div>
+        <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+          {{ exercise.description }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Target muscles -->
+  <div class="card">
+    <h2 class="font-semibold text-gray-800 dark:text-white mb-3">Muscles Worked</h2>
+    <div class="flex flex-wrap gap-2">
+      <div class="flex items-center gap-2">
+        <span class="text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wide">Primary</span>
+        <span class="px-3 py-1 bg-orange-500 text-white text-xs font-semibold rounded-full capitalize">
+          {{ exercise.target }}
+        </span>
+      </div>
+    </div>
+    {% if exercise.secondaryMuscles %}
+    <div class="flex flex-wrap gap-2 mt-3">
+      <span class="text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wide self-center">Secondary</span>
+      {% for muscle in exercise.secondaryMuscles %}
+      <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-medium rounded-full capitalize">
+        {{ muscle }}
+      </span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- Instructions -->
+  <div class="card">
+    <h2 class="font-semibold text-gray-800 dark:text-white mb-4">How to do it</h2>
+    <ol class="space-y-3">
+      {% for step in exercise.instructions %}
+      <li class="flex gap-3">
+        <span class="shrink-0 w-6 h-6 bg-orange-500 text-white text-xs font-bold rounded-full flex items-center justify-center mt-0.5">
+          {{ forloop.counter }}
+        </span>
+        <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{{ step }}</p>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+
+</div>
+{% endblock %}

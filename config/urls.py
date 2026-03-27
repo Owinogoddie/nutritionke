@@ -10,4 +10,5 @@ urlpatterns = [
     path('accounts/', include('apps.accounts.urls', namespace='accounts')),
     path('dashboard/', include('apps.dashboard.urls')),
     path('nutrition/', include('apps.nutrition.urls')),
+    path("exercises/", include("apps.exercises.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
